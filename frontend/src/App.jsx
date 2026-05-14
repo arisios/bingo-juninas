@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import Home from './pages/Home';
@@ -16,20 +16,13 @@ function AdminRoute({ children }) {
   return children;
 }
 
-function PlayerRoute({ children }) {
-  const { user, loading } = useAuth();
-  if (loading) return <div className="min-h-screen bg-junina flex items-center justify-center"><LoadingSpinner size="lg"/></div>;
-  if (!user) return <Navigate to="/" replace/>;
-  return children;
-}
-
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/jogo" element={<PlayerRoute><GamePage/></PlayerRoute>}/>
+          <Route path="/jogo" element={<GamePage/>}/>
           <Route path="/projecao" element={<ProjecaoPage/>}/>
           <Route path="/admin/login" element={<AuthPage/>}/>
           <Route path="/admin" element={<AdminRoute><AdminPanel/></AdminRoute>}/>
