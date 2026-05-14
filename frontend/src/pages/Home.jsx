@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import api from '../utils/api';
 import Bandeirinhas from '../components/Bandeirinhas';
 import LoadingSpinner from '../components/LoadingSpinner';
+import BrandMark from '../components/BrandMark';
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -33,11 +34,8 @@ export default function Home() {
       <Bandeirinhas />
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-sm animate-slide-up">
-          {/* Logo */}
-          <div className="text-center mb-6">
-            <img src="/logojuninas.png" alt="Juninas do Rio" className="h-20 mx-auto object-contain mb-3 animate-float"/>
-            <h1 className="font-display text-3xl font-bold" style={{color:'#4B1E6D'}}>Bingo</h1>
-            <p className="text-sm font-semibold tracking-widest uppercase mt-1" style={{color:'#C79A3B'}}>Temporada 2026</p>
+          <div className="text-center mb-6 animate-float">
+            <BrandMark size="lg" />
           </div>
 
           {checking ? (

@@ -6,6 +6,7 @@ import { useGameSocket } from '../hooks/useGameSocket';
 import { getColumn } from '../utils/bingo';
 import Bandeirinhas from '../components/Bandeirinhas';
 import LoadingSpinner from '../components/LoadingSpinner';
+import BrandMark from '../components/BrandMark';
 
 const COL_COLORS = { B:'#C21874', I:'#6F2DA8', N:'#007C91', G:'#D96C2F', O:'#C79A3B' };
 
@@ -82,9 +83,9 @@ export default function AdminPanel() {
       <header className="px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/logojuninas.png" alt="Juninas do Rio" style={{height:36,objectFit:'contain'}}/>
-            <div>
-              <h1 className="font-display font-bold text-base" style={{color:'#4B1E6D'}}>Admin · Bingo</h1>
+            <BrandMark size="sm" showSub={false} />
+            <div style={{borderLeft:'1px solid rgba(199,154,59,0.3)', paddingLeft:10, marginLeft:4}}>
+              <p className="text-xs font-semibold" style={{color:'#4B1E6D'}}>Admin</p>
               <p className="text-xs" style={{color:'#C79A3B'}}>@{user?.instagram || user?.name}</p>
             </div>
           </div>

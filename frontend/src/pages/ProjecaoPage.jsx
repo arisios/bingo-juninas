@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api, { WS_URL } from '../utils/api';
 import { getColumn, TOTAL } from '../utils/bingo';
+import BrandMark from '../components/BrandMark';
 
 const COL_COLORS = { B:'#C21874', I:'#6F2DA8', N:'#007C91', G:'#D96C2F', O:'#C79A3B' };
 const COLS = ['B','I','N','G','O'];
@@ -51,12 +52,12 @@ export default function ProjecaoPage() {
 
       {/* Header */}
       <div style={{padding:'16px 24px',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'1px solid rgba(199,154,59,0.15)'}}>
-        <img src="/logojuninas.png" alt="Juninas do Rio" style={{height:48,objectFit:'contain'}}/>
+        <BrandMark size="sm" dark showSub={false} />
         <div style={{textAlign:'center'}}>
           <div style={{color:'#C79A3B',fontSize:14,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase'}}>{round?.name || 'Aguardando rodada'}</div>
           <div style={{color:'rgba(255,255,255,0.4)',fontSize:12}}>{drawn.length}/{TOTAL} sorteados · {online} jogadores</div>
         </div>
-        <div style={{textAlign:'right',color:'rgba(255,255,255,0.3)',fontSize:11}}>Bingo 50<br/>Juninas do Rio</div>
+        <div style={{textAlign:'right',color:'rgba(255,255,255,0.3)',fontSize:11,fontFamily:'DM Sans,sans-serif'}}>Bingo 50<br/>Temporada 2026</div>
       </div>
 
       {/* Número principal */}
