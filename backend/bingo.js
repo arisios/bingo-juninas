@@ -39,22 +39,8 @@ function getColumn(number) {
 }
 
 function hasBingo(grid, drawnSet) {
-  const rows = 5, cols = 5;
-  const marked = (col, row) => grid[col][row] === FREE_CENTER || drawnSet.has(grid[col][row]);
-
-  // Verificar linhas
-  for (let r = 0; r < rows; r++) {
-    if ([0,1,2,3,4].every(c => marked(c, r))) return true;
-  }
-  // Verificar colunas
-  for (let c = 0; c < cols; c++) {
-    if ([0,1,2,3,4].every(r => marked(c, r))) return true;
-  }
-  // Diagonais
-  if ([0,1,2,3,4].every(i => marked(i, i))) return true;
-  if ([0,1,2,3,4].every(i => marked(i, 4-i))) return true;
-
-  return false;
+  // Cartela cheia: todos os 24 números marcados (FREE já conta)
+  return grid.flat().every(n => n === FREE_CENTER || drawnSet.has(n));
 }
 
 function getCardNumbers(grid) {

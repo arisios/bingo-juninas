@@ -10,12 +10,8 @@ export function getColumn(number) {
 }
 
 export function hasBingo(grid, drawnSet) {
-  const marked = (col, row) => grid[col][row] === 0 || drawnSet.has(grid[col][row]);
-  for (let r = 0; r < 5; r++) if ([0,1,2,3,4].every(c => marked(c,r))) return true;
-  for (let c = 0; c < 5; c++) if ([0,1,2,3,4].every(r => marked(c,r))) return true;
-  if ([0,1,2,3,4].every(i => marked(i,i))) return true;
-  if ([0,1,2,3,4].every(i => marked(i,4-i))) return true;
-  return false;
+  // Cartela cheia: todos os 24 números marcados (FREE já conta)
+  return grid.flat().every(n => n === 0 || drawnSet.has(n));
 }
 
 export function countMissing(grid, drawnSet) {
