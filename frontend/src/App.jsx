@@ -22,9 +22,10 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/login" element={<AuthPage/>}/>
           <Route path="/jogo" element={<GamePage/>}/>
           <Route path="/projecao" element={<ProjecaoPage/>}/>
-          <Route path="/admin/login" element={<AuthPage/>}/>
+          <Route path="/admin/login" element={<Navigate to="/login" replace/>}/>
           <Route path="/admin" element={<AdminRoute><AdminPanel/></AdminRoute>}/>
           <Route path="*" element={<Navigate to="/" replace/>}/>
         </Routes>
