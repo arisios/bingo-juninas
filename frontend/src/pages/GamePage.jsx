@@ -26,8 +26,38 @@ export default function GamePage() {
   const soundRef = useRef(soundEnabled);
   soundRef.current = soundEnabled;
 
+  const drawnRef = useRef(drawn);
+  drawnRef.current = drawn;
+
   useEffect(() => {
     if (!card) navigate('/');
+  }, [card]);
+
+  // Polling fallback: busca os números sorteados a cada 4s caso WS falhe
+  useEffect(() => {
+    if (!card) return;
+    const poll = async () => {
+      try {
+        const { data } = await api.get('/rounds/active');
+        if (!data.round) { setRoundActive(false); return; }
+        const newDrawn = data.drawn || [];
+        if (newDrawn.length !== drawnRef.current.length) {
+          const last = newDrawn[newDrawn.length - 1];
+          if (last && last !== drawnRef.current[drawnRef.current.length - 1]) {
+            setLastDrawn(last);
+            if (soundRef.current) {
+              const { getColumn } = await import('../utils/bingo');
+              const col = getColumn(last);
+              setLastColumn(col);
+              announceNumber(last, col);
+            }
+          }
+          setDrawn(newDrawn);
+        }
+      } catch {}
+    };
+    const t = setInterval(poll, 4000);
+    return () => clearInterval(t);
   }, [card]);
 
   useGameSocket((msg) => {
